@@ -1,0 +1,28 @@
+import React from 'react'
+import {NavLink, useNavigate} from 'react-router-dom'
+import {AuthContext} from '../context/AuthContext'
+
+export const Navbar = () => {
+  const navigate = useNavigate()
+  const auth = React.useContext(AuthContext)
+
+  const logoutHandler = e => {
+    e.preventDefault()
+    auth.logout()
+    navigate('/')
+  }
+
+  return (
+    <nav>
+      <div className='nav-wrapper purple darken-1' style={{padding: '0 2rem'}}>
+        <span>Сокращение ссылок</span>
+        <ul id='nav-mobile' className='right hide-on-med-and-down'>
+          <li><NavLink to='/create'>Создать</NavLink></li>
+          <li><NavLink to='/links'>Ссылки</NavLink></li>
+          <li><a href='/' onClick={logoutHandler}>Выйти</a></li>
+        </ul>
+      </div>
+    </nav>
+
+  )
+}
